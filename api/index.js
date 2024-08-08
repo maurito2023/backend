@@ -3,7 +3,7 @@ const cors = require('cors');
 const routerApi = require('./routes');
 const {logErrors, errorHandler} = require('./middlewares/error.handler');
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 const whilelist = ['http://localhost:8080','http://127.0.0.1:5500', 'https://myapp.co'];
 const options = {
     origin:(origin, callback) => {
@@ -20,11 +20,11 @@ app.use(logErrors);
 app.use(errorHandler);
 app.use(cors(options));
 
-app.get("/", (req, res)=>{
+app.get("/api", (req, res)=>{
     res.send("Hola este es mi servidor en express");
 });
 
-app.get("/otraRuta", (req, res) =>{
+app.get("/api/otraRuta", (req, res) =>{
     res.send("Mi otra tienda en expresss");
 })
 
